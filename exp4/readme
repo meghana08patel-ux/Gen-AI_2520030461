@@ -1,0 +1,1 @@
+I learned how text is divided into smaller parts called tokens before it is processed by a language model. I used three different tokenizers: GPT-2, Multilingual BERT and XLM-R. I tested them with sample sentences in English, Telugu and Hindi to see how each tokenizer divides the text. The program displayed the tokens, their IDs and the total number of tokens for each sentence.
