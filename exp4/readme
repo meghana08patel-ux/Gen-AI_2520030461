@@ -1,1 +1,21 @@
-I learned how text is divided into smaller parts called tokens before it is processed by a language model. I used three different tokenizers: GPT-2, Multilingual BERT and XLM-R. I tested them with sample sentences in English, Telugu and Hindi to see how each tokenizer divides the text. The program displayed the tokens, their IDs and the total number of tokens for each sentence.
+In this experiment was to compare how different tokenizers split the same text into tokens. I tested English, Telugu and Hindi sentences using three tokenizer models.
+We used the AutoTokenizer class to load three tokenizers:
+
+- GPT-2 tokenizer (BPE)
+- Multilingual BERT tokenizer (WordPiece)
+- XLM-R tokenizer (SentencePiece)
+
+The program sends each sample sentence to all three tokenizers. It prints the tokens, token IDs and total token count for every language and tokenizer. This makes it possible to see that the same sentence can be split differently depending on the tokenizer.
+
+Files used
+- tokenizer_comparison.py – loads the tokenizers and compares the sample sentences.
+- requirements.txt – contains transformers and sentencepiece.
+
+pip install -r requirements.txt
+python tokenizer_comparison.py
+
+The first run downloads the tokenizer files from Hugging Face, so an internet connection is required. After they are downloaded, the program prints the comparison in the terminal.
+
+For each language, the output shows the tokens, token IDs and token count for each tokenizer. The number and type of tokens are not necessarily the same across the three tokenizers.
+
+
