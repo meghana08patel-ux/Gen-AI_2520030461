@@ -1,1 +1,32 @@
-In this experiment, I worked with two different LLM providers, Gemini and Ollama. The main idea was to make one Python program that can work with different AI models. I created a common class for the providers and separate classes for Gemini and Ollama. I also added an option to select which provider I wanted to use. After selecting the provider, I could enter a prompt and get a response from the model. I also created a test file to check whether the program was working correctly. This experiment helped me understand how different AI models can be connected to the same application and how abstraction is used in Python.
+In this experiment was to use different language model providers through one common interface. The program gives an option to choose Gemini (cloud) or Ollama (local).
+
+Wecreated a common LLMProvider interface . Gemini and Ollama have their own provider classes, but both follow this same method. The LLMClient uses the selected provider, so the main program does not need separate prompt-handling code for each model.
+
+When the program starts, it asks you to select gemini or ollama. It then asks for a question and prints the generated answer.
+
+Files used
+
+- main.py – asks for the provider and prompt.
+- llm_client.py – contains the common interface, Gemini provider, Ollama provider and client.
+- test_client.py – tests the common client using a fake provider.
+- requirements.txt – lists the required packages.
+
+How I executed it
+
+pip install -r requirements.txt
+GEMINI_API_KEY=your_gemini_api_key
+python main.py
+```
+
+Type gemini or ollama when asked. Then enter a prompt.
+
+For the Ollama option, Ollama must be installed and running, and the llama3.2 model must be available locally. If it is not downloaded yet, use:
+
+ollama pull llama3.2
+
+To run the unit test:
+python -m unittest test_client.py
+
+After entering a provider and a prompt, the program prints the answer from that provider. The unit test checks the output from the fake provider and reports whether the test passed.
+
+
