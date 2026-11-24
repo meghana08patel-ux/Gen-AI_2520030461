@@ -1,1 +1,30 @@
-In this experiment along with generating responses, we also worked on tracking how many input and output tokens are used, how much time the request took and the estimated cost of using the API,also added a retry option so that the program can try again if a temporary error occurs. MongoDB was used to store the usage details, including the model name, provider, token count and request status, also wrote test cases to check the working of the program. Through this experiment, I learned how to monitor API usage, estimate costs and handle errors.
+In this experiment was to monitor LLM calls by recording token usage, response time, estimated API cost and request status. The usage information is stored in MongoDB.
+This experiment extends the provider-based client from the previous experiment. Both Gemini and Ollama return the generated text along with input and output token counts.
+The client measures how long the model takes to respond. For Gemini, it estimates the cost using the input and output price values given in the environment variables. For Ollama, the program records the hosted API cost as zero because it is running locally; this does not mean local computing has no cost.
+The program also retries certain temporary failures, such as timeouts and rate-limit or service errors. Each call's usage details are sent to the `UsageLogger`, which saves the record in the `llm_monitoring` database and `api_usage` collection in MongoDB.
+
+Files used
+- main.py – selects the provider and runs the prompt.
+- llm_client.py – handles generation, token counts, latency, estimated cost and retry logic.
+- usage_logger.py – connects to MongoDB and stores usage records.
+- test_client.py – provider/client test file.
+- requirements.txt – required Python packages.
+- .env – local configuration values (keep this file private).
+
+pip install -r requirements.txt
+env
+GEMINI_API_KEY=your_gemini_api_key
+MONGODB_URI=your_mongodb_connection_string
+GEMINI_INPUT_PRICE_PER_MILLION=your_input_price
+GEMINI_OUTPUT_PRICE_PER_MILLION=your_output_price
+
+MongoDB must be accessible using the connection string. The program checks the connection when UsageLogger is created.
+
+python main.py
+
+Choose gemini or ollama, and then enter a prompt. For Ollama, make sure the Ollama service is running and llama3.2 is installed.
+
+
+The terminal displays the generated answer and monitoring details such as input tokens, output tokens and estimated cost. It also displays whether the usage record was saved to MongoDB. If MongoDB is not reachable or the environment values are missing, the program may show a connection or configuration error.
+
+
