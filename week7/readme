@@ -1,0 +1,26 @@
+The aim of this experiment was to understand how a language model predicts the next token based on the text given to it. I used the GPT-2 model and checked the most likely next tokens for a few sample prompts.
+In this experiment, I used the pre-trained GPT-2 model. The program takes four prompts as input:
+- The cat is
+- Artificial intelligence is
+- India is a
+- Machine learning helps
+
+First, the tokenizer converts each prompt into token IDs. These IDs are given to GPT-2, which produces logits for the next token. I used softmax to convert the logits into probabilities. Then, the program selects the top 5 tokens with the highest probabilities.
+- main.py – loads GPT-2, processes the prompts, calculates next-token probabilities and saves the results.
+- requirements.txt – contains the required Python libraries: torch and transformers.
+- week7_probability_results.csv – stores the generated results.
+
+pip install -r requirements.txt
+
+python main.py
+
+For every prompt, the program displays:
+- The prompt given to the model
+- Input token IDs
+- The top 5 candidate next tokens
+- The rank of each candidate
+- The token ID and probability
+
+The model gives different possible next tokens for each prompt, and each token has its own probability. The token with the highest probability is the models most likely next-token prediction among the candidates shown. The prediction is not guaranteed to be the actual next word.
+
+
