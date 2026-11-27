@@ -1,0 +1,26 @@
+The aim of this experiment was to check how well a local Large Language Model answers a fixed set of questions. I used the Llama 3.2 model through Ollama and compared its answers with the expected answers using keyword matching.
+The experiment uses a question set containing 30 questions related to topics such as tokenization, token IDs, token usage, API cost, rate limits, next-token prediction and positional encoding.
+For every question, the Python program sends the question to the Llama 3.2 model running locally through the Ollama API. 
+After getting the answer, the program checks how many of the expected keywords are present in the response. It calculates the keyword coverage percentage using:
+
+Score = (Number of matched keywords / Total expected keywords) × 100
+If the score is 60% or above, the question is marked as PASS. Otherwise, it is marked as REVIEW. If a request fails, the status is recorded as ERROR.
+-main.py – sends questions to Ollama, gets answers, calculates keyword scores and creates the evaluation report.
+-golden_set.json – contains the 30 questions, expected answers, keywords and source links.
+- requirements.txt – contains the requests library.
+-baseline_results.csv – generated output containing the answers and evaluation results.
+
+pip install -r requirements.txt
+python main.py
+
+OUTPUT:
+The program displays a baseline evaluation summary with:
+- Total number of questions
+- Successful responses
+- Number of questions marked PASS
+- Number of questions marked REVIEW
+- Failed requests
+- Average keyword coverage
+- Evaluation date
+
+
